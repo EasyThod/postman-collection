@@ -1,7 +1,7 @@
 # Postman Collection Run
 
 This project provides the ability to integrate Postman collections into the Continuous Integration (CI) process, allowing API tests to be run automatically. The results of running collections are processed and presented as a detailed Allure report that contains complete information about each request, including its parameters, responses and possible errors. This provides visibility and convenience when analyzing test results, allowing you to quickly identify and fix problems in the API.
-
+ 
 ## Сontent
 - [Technology](#Technology)
 - [Requirements](#Requirements)
