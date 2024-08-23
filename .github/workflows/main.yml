@@ -1,0 +1,47 @@
+name: run-postman-collection
+on: [push, pull_request]
+
+jobs:
+  build: 
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "16.x"
+
+      - name: Install
+        run: |
+          npm install -g newman
+          npm install -g newman-reporter-my_allure.tgz
+
+      - name: Run POSTMAN collection
+        run: |
+          newman run pm/restful-booker.postman_collection.json -e pm/booking_env.postman_environment.json -r my_allure
+        continue-on-error: true
+
+      - name: Get Allure history
+        uses: actions/checkout@v2
+        if: always()
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Allure Report action from marketplace
+        uses: simple-elf/allure-report-action@master
+        if: always()
+        with:
+          allure_results: allure-results
+          allure_history: allure-history
+
+      - name: Deploy report to Github Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v2
+        env:
+          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: allure-history
