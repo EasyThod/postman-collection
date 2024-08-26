@@ -16,7 +16,7 @@ This project provides the ability to integrate Postman collections into the Cont
 - [Allure](https://allurereport.org/)
 
 ## Requirements
-To install and run the project, you need [NodeJS](https://nodejs.org/), [Java](https://www.java.com/) version 8 or above.
+To install and run the project, you need [NodeJS](https://nodejs.org/) version 16 or above, [Java](https://www.java.com/) version 8 or above.
 
 ## Installation
 
